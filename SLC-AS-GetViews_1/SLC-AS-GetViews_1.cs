@@ -74,35 +74,13 @@ namespace SLC_AS_GetViews_1
 			string rootViewString = engine.GetScriptParam("RootView").Value;
 
 			IDms thisDms = engine.GetDms();
-			var views = thisDms.GetViews();
 
-			var rootview = views.FirstOrDefault(x => x.Name == rootViewString);
+			var views = thisDms.GetView(rootViewString);
 
-			var viewsResult = GetViews(views, rootview);
-
-			foreach (var view in viewsResult)
+			foreach (var view in views.ChildViews)
 			{
 				engine.GenerateInformation($"View: {view.Name} ({view.Id})");
 			}
-		}
-
-		private IEnumerable<IDmsView> GetViews(IEnumerable<IDmsView> views, IDmsView rootView)
-		{
-			if (rootView == null)
-			{
-				return views;
-			}
-
-			List<IDmsView> viewList = new List<IDmsView>();
-			foreach (var view in views)
-			{
-				if (view.Parent != null && view.Parent.Id == rootView.Id)
-				{
-					viewList.Add(view);
-				}
-			}
-
-			return viewList;
 		}
 	}
 }
