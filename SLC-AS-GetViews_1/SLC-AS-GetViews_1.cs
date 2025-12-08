@@ -73,7 +73,13 @@ namespace SLC_AS_GetViews_1
 		{
 			try
 			{
-				string rootViewString = engine.GetScriptParam("RootView").Value;
+				string rootViewString = engine.GetScriptParam("RootView")?.Value;
+				if (string.IsNullOrWhiteSpace(rootViewString))
+				{
+					engine.ExitFail("RootView parameter is required. Please provide a view name or ID.");
+					return;
+				}
+
 				string inputType = engine.GetScriptParam("RootViewInputType")?.Value ?? "Name";
 
 				IDms thisDms = engine.GetDms();
