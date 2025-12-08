@@ -65,21 +65,67 @@ namespace SLC_AS_GetViews_1
 	/// </summary>
 	public class Script
 	{
+		private const int IndentationSpaces = 2;
+
 		/// <summary>
 		/// The script entry point.
 		/// </summary>
 		/// <param name="engine">Link with SLAutomation process.</param>
 		public void Run(IEngine engine)
 		{
+			// Get and validate RootView parameter
 			string rootViewString = engine.GetScriptParam("RootView").Value;
-
-			IDms thisDms = engine.GetDms();
-
-			var views = thisDms.GetView(rootViewString);
-
-			foreach (var view in views.ChildViews)
+			if (string.IsNullOrWhiteSpace(rootViewString))
 			{
-				engine.GenerateInformation($"View: {view.Name} ({view.Id})");
+				engine.GenerateInformation("Error: RootView parameter is required and cannot be empty.");
+				return;
+			}
+
+			// Get RecursionLevel parameter with safe handling
+			var recursionLevelParam = engine.GetScriptParam("RecursionLevel");
+			string recursionLevelString = recursionLevelParam != null ? recursionLevelParam.Value : string.Empty;
+
+			// Parse recursion level, default to 1 if not specified or invalid
+			if (!int.TryParse(recursionLevelString, out int recursionLevel) || recursionLevel < 1)
+			{
+				recursionLevel = 1;
+			}
+
+			try
+			{
+				IDms thisDms = engine.GetDms();
+				var rootView = thisDms.GetView(rootViewString);
+
+				// Process child views with the specified recursion level
+				ProcessViews(engine, rootView.ChildViews, recursionLevel, 1);
+			}
+			catch (Exception ex)
+			{
+				engine.GenerateInformation($"Error: Unable to retrieve view '{rootViewString}'. Please verify the view name and try again.");
+				engine.Log($"Exception details: {ex.Message}");
+			}
+		}
+
+		/// <summary>
+		/// Recursively processes views up to the specified depth level.
+		/// </summary>
+		/// <param name="engine">Link with SLAutomation process.</param>
+		/// <param name="views">Collection of views to process.</param>
+		/// <param name="recursionLevel">The recursion level specified by the user (1 = direct children only).</param>
+		/// <param name="currentLevel">Current level in the hierarchy (1 = direct children).</param>
+		private void ProcessViews(IEngine engine, IEnumerable<IDmsView> views, int recursionLevel, int currentLevel)
+		{
+			string indentation = new string(' ', (currentLevel - 1) * IndentationSpaces);
+
+			foreach (var view in views)
+			{
+				engine.GenerateInformation($"{indentation}View: {view.Name} ({view.Id})");
+
+				// Recursively process child views if we haven't reached the max level
+				if (currentLevel < recursionLevel)
+				{
+					ProcessViews(engine, view.ChildViews, recursionLevel, currentLevel + 1);
+				}
 			}
 		}
 	}
