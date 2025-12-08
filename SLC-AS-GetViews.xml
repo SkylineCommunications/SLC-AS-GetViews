@@ -17,6 +17,9 @@
 		<ScriptParameter id="2" type="string" values="">
 			<Description>RootView</Description>
 		</ScriptParameter>
+		<ScriptParameter id="3" type="string" values="Name;ID">
+			<Description>RootViewInputType</Description>
+		</ScriptParameter>
 	</Parameters>
 
 	<Script>

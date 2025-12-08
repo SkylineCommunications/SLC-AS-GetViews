@@ -72,10 +72,27 @@ namespace SLC_AS_GetViews_1
 		public void Run(IEngine engine)
 		{
 			string rootViewString = engine.GetScriptParam("RootView").Value;
+			string inputType = engine.GetScriptParam("RootViewInputType").Value;
 
 			IDms thisDms = engine.GetDms();
 
-			var views = thisDms.GetView(rootViewString);
+			IDmsView views;
+			if (string.Equals(inputType, "ID", StringComparison.OrdinalIgnoreCase))
+			{
+				// Parse the input as an integer ID
+				if (!int.TryParse(rootViewString, out int viewId))
+				{
+					engine.ExitFail($"Invalid View ID: '{rootViewString}'. Expected a numeric value.");
+					return;
+				}
+
+				views = thisDms.GetView(viewId);
+			}
+			else
+			{
+				// Default to treating input as a Name
+				views = thisDms.GetView(rootViewString);
+			}
 
 			foreach (var view in views.ChildViews)
 			{
