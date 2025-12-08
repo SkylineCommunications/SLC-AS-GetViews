@@ -71,32 +71,39 @@ namespace SLC_AS_GetViews_1
 		/// <param name="engine">Link with SLAutomation process.</param>
 		public void Run(IEngine engine)
 		{
-			string rootViewString = engine.GetScriptParam("RootView").Value;
-			string inputType = engine.GetScriptParam("RootViewInputType").Value;
-
-			IDms thisDms = engine.GetDms();
-
-			IDmsView views;
-			if (string.Equals(inputType, "ID", StringComparison.OrdinalIgnoreCase))
+			try
 			{
-				// Parse the input as an integer ID
-				if (!int.TryParse(rootViewString, out int viewId))
+				string rootViewString = engine.GetScriptParam("RootView").Value;
+				string inputType = engine.GetScriptParam("RootViewInputType")?.Value ?? "Name";
+
+				IDms thisDms = engine.GetDms();
+
+				IDmsView views;
+				if (string.Equals(inputType, "ID", StringComparison.OrdinalIgnoreCase))
 				{
-					engine.ExitFail($"Invalid View ID: '{rootViewString}'. Expected a numeric value.");
-					return;
+					// Parse the input as an integer ID
+					if (!int.TryParse(rootViewString, out int viewId))
+					{
+						engine.ExitFail($"Invalid View ID: '{rootViewString}'. Expected a numeric value.");
+						return;
+					}
+
+					views = thisDms.GetView(viewId);
+				}
+				else
+				{
+					// Default to treating input as a Name
+					views = thisDms.GetView(rootViewString);
 				}
 
-				views = thisDms.GetView(viewId);
+				foreach (var view in views.ChildViews)
+				{
+					engine.GenerateInformation($"View: {view.Name} ({view.Id})");
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				// Default to treating input as a Name
-				views = thisDms.GetView(rootViewString);
-			}
-
-			foreach (var view in views.ChildViews)
-			{
-				engine.GenerateInformation($"View: {view.Name} ({view.Id})");
+				engine.ExitFail($"Failed to retrieve view: {ex.Message}");
 			}
 		}
 	}
