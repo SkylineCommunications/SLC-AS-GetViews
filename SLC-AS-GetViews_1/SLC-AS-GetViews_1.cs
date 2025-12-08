@@ -90,7 +90,7 @@ namespace SLC_AS_GetViews_1
 					// Parse the input as an integer ID
 					if (!int.TryParse(rootViewString, out int viewId))
 					{
-						engine.ExitFail($"Invalid View ID: '{rootViewString}'. Expected a numeric value.");
+						engine.ExitFail($"Invalid View ID: '{rootViewString}'. Please provide a numeric ID (e.g., 123).");
 						return;
 					}
 
