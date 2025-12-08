@@ -72,14 +72,46 @@ namespace SLC_AS_GetViews_1
 		public void Run(IEngine engine)
 		{
 			string rootViewString = engine.GetScriptParam("RootView").Value;
+			string recursionLevelString = engine.GetScriptParam("RecursionLevel").Value;
+
+			// Parse recursion level, default to 1 if not specified or invalid
+			if (!int.TryParse(recursionLevelString, out int recursionLevel) || recursionLevel < 1)
+			{
+				recursionLevel = 1;
+			}
 
 			IDms thisDms = engine.GetDms();
+			var rootView = thisDms.GetView(rootViewString);
 
-			var views = thisDms.GetView(rootViewString);
+			// Process child views with the specified recursion level
+			ProcessViews(engine, rootView.ChildViews, recursionLevel, 0);
+		}
 
-			foreach (var view in views.ChildViews)
+		/// <summary>
+		/// Recursively processes views up to the specified depth level.
+		/// </summary>
+		/// <param name="engine">Link with SLAutomation process.</param>
+		/// <param name="views">Collection of views to process.</param>
+		/// <param name="maxDepth">Maximum recursion depth.</param>
+		/// <param name="currentDepth">Current recursion depth.</param>
+		private void ProcessViews(IEngine engine, IEnumerable<IDmsView> views, int maxDepth, int currentDepth)
+		{
+			if (currentDepth >= maxDepth)
 			{
-				engine.GenerateInformation($"View: {view.Name} ({view.Id})");
+				return;
+			}
+
+			string indentation = new string(' ', currentDepth * 2);
+
+			foreach (var view in views)
+			{
+				engine.GenerateInformation($"{indentation}View: {view.Name} ({view.Id})");
+
+				// Recursively process child views if we haven't reached max depth
+				if (currentDepth + 1 < maxDepth)
+				{
+					ProcessViews(engine, view.ChildViews, maxDepth, currentDepth + 1);
+				}
 			}
 		}
 	}
