@@ -88,11 +88,18 @@ namespace SLC_AS_GetViews_1
 				recursionLevel = 1;
 			}
 
-			IDms thisDms = engine.GetDms();
-			var rootView = thisDms.GetView(rootViewString);
+			try
+			{
+				IDms thisDms = engine.GetDms();
+				var rootView = thisDms.GetView(rootViewString);
 
-			// Process child views with the specified recursion level
-			ProcessViews(engine, rootView.ChildViews, recursionLevel, 0);
+				// Process child views with the specified recursion level
+				ProcessViews(engine, rootView.ChildViews, recursionLevel, 1);
+			}
+			catch (Exception ex)
+			{
+				engine.GenerateInformation($"Error: Unable to retrieve view '{rootViewString}'. {ex.Message}");
+			}
 		}
 
 		/// <summary>
@@ -100,20 +107,20 @@ namespace SLC_AS_GetViews_1
 		/// </summary>
 		/// <param name="engine">Link with SLAutomation process.</param>
 		/// <param name="views">Collection of views to process.</param>
-		/// <param name="maxDepth">Maximum recursion depth.</param>
-		/// <param name="currentDepth">Current recursion depth.</param>
-		private void ProcessViews(IEngine engine, IEnumerable<IDmsView> views, int maxDepth, int currentDepth)
+		/// <param name="recursionLevel">The recursion level specified by the user (1 = direct children only).</param>
+		/// <param name="currentLevel">Current level in the hierarchy (1 = direct children).</param>
+		private void ProcessViews(IEngine engine, IEnumerable<IDmsView> views, int recursionLevel, int currentLevel)
 		{
-			string indentation = new string(' ', currentDepth * 2);
+			string indentation = new string(' ', (currentLevel - 1) * 2);
 
 			foreach (var view in views)
 			{
 				engine.GenerateInformation($"{indentation}View: {view.Name} ({view.Id})");
 
-				// Recursively process child views if we haven't reached max depth
-				if (currentDepth + 1 < maxDepth)
+				// Recursively process child views if we haven't reached the max level
+				if (currentLevel < recursionLevel)
 				{
-					ProcessViews(engine, view.ChildViews, maxDepth, currentDepth + 1);
+					ProcessViews(engine, view.ChildViews, recursionLevel, currentLevel + 1);
 				}
 			}
 		}
