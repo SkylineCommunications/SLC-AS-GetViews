@@ -65,6 +65,8 @@ namespace SLC_AS_GetViews_1
 	/// </summary>
 	public class Script
 	{
+		private const int IndentationSpaces = 2;
+
 		/// <summary>
 		/// The script entry point.
 		/// </summary>
@@ -80,7 +82,8 @@ namespace SLC_AS_GetViews_1
 			}
 
 			// Get RecursionLevel parameter with safe handling
-			string recursionLevelString = engine.GetScriptParam("RecursionLevel")?.Value ?? string.Empty;
+			var recursionLevelParam = engine.GetScriptParam("RecursionLevel");
+			string recursionLevelString = recursionLevelParam != null ? recursionLevelParam.Value : string.Empty;
 
 			// Parse recursion level, default to 1 if not specified or invalid
 			if (!int.TryParse(recursionLevelString, out int recursionLevel) || recursionLevel < 1)
@@ -98,7 +101,8 @@ namespace SLC_AS_GetViews_1
 			}
 			catch (Exception ex)
 			{
-				engine.GenerateInformation($"Error: Unable to retrieve view '{rootViewString}'. {ex.Message}");
+				engine.GenerateInformation($"Error: Unable to retrieve view '{rootViewString}'. Please verify the view name and try again.");
+				engine.Log($"Exception details: {ex.Message}");
 			}
 		}
 
@@ -111,7 +115,7 @@ namespace SLC_AS_GetViews_1
 		/// <param name="currentLevel">Current level in the hierarchy (1 = direct children).</param>
 		private void ProcessViews(IEngine engine, IEnumerable<IDmsView> views, int recursionLevel, int currentLevel)
 		{
-			string indentation = new string(' ', (currentLevel - 1) * 2);
+			string indentation = new string(' ', (currentLevel - 1) * IndentationSpaces);
 
 			foreach (var view in views)
 			{
