@@ -73,36 +73,56 @@ namespace SLC_AS_GetViews_1
 		/// <param name="engine">Link with SLAutomation process.</param>
 		public void Run(IEngine engine)
 		{
-			// Get and validate RootView parameter
-			string rootViewString = engine.GetScriptParam("RootView").Value;
-			if (string.IsNullOrWhiteSpace(rootViewString))
-			{
-				engine.GenerateInformation("Error: RootView parameter is required and cannot be empty.");
-				return;
-			}
-
-			// Get RecursionLevel parameter with safe handling
-			var recursionLevelParam = engine.GetScriptParam("RecursionLevel");
-			string recursionLevelString = recursionLevelParam != null ? recursionLevelParam.Value : string.Empty;
-
-			// Parse recursion level, default to 1 if not specified or invalid
-			if (!int.TryParse(recursionLevelString, out int recursionLevel) || recursionLevel < 1)
-			{
-				recursionLevel = 1;
-			}
-
 			try
 			{
+				// Get and validate RootView parameter
+				string rootViewString = engine.GetScriptParam("RootView")?.Value;
+				if (string.IsNullOrWhiteSpace(rootViewString))
+				{
+					engine.ExitFail("RootView parameter is required. Please provide a view name or ID.");
+					return;
+				}
+
+				// Get RootViewInputType parameter with default
+				string inputType = engine.GetScriptParam("RootViewInputType")?.Value ?? "Name";
+
+				// Get RecursionLevel parameter with safe handling
+				var recursionLevelParam = engine.GetScriptParam("RecursionLevel");
+				string recursionLevelString = recursionLevelParam != null ? recursionLevelParam.Value : string.Empty;
+
+				// Parse recursion level, default to 1 if not specified or invalid
+				if (!int.TryParse(recursionLevelString, out int recursionLevel) || recursionLevel < 1)
+				{
+					recursionLevel = 1;
+				}
+
 				IDms thisDms = engine.GetDms();
-				var rootView = thisDms.GetView(rootViewString);
+
+				// Get the root view based on input type
+				IDmsView rootView;
+				if (string.Equals(inputType, "ID", StringComparison.OrdinalIgnoreCase))
+				{
+					// Parse the input as an integer ID
+					if (!int.TryParse(rootViewString, out int viewId))
+					{
+						engine.ExitFail($"Invalid View ID: '{rootViewString}'. Please provide a numeric ID (e.g., 123).");
+						return;
+					}
+
+					rootView = thisDms.GetView(viewId);
+				}
+				else
+				{
+					// Default to treating input as a Name
+					rootView = thisDms.GetView(rootViewString);
+				}
 
 				// Process child views with the specified recursion level
 				ProcessViews(engine, rootView.ChildViews, recursionLevel, 1);
 			}
 			catch (Exception ex)
 			{
-				engine.GenerateInformation($"Error: Unable to retrieve view '{rootViewString}'. Please verify the view name and try again.");
-				engine.Log($"Exception details: {ex.Message}");
+				engine.ExitFail($"Failed to retrieve view: {ex.Message}. Please verify the view name/ID exists and try again.");
 			}
 		}
 

@@ -17,7 +17,10 @@
 		<ScriptParameter id="2" type="string" values="">
 			<Description>RootView</Description>
 		</ScriptParameter>
-		<ScriptParameter id="3" type="string" values="">
+		<ScriptParameter id="3" type="string" values="Name;ID">
+			<Description>RootViewInputType</Description>
+		</ScriptParameter>
+		<ScriptParameter id="4" type="string" values="">
 			<Description>RecursionLevel</Description>
 		</ScriptParameter>
 	</Parameters>
