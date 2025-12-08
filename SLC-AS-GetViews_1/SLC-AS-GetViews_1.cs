@@ -103,7 +103,7 @@ namespace SLC_AS_GetViews_1
 			}
 			catch (Exception ex)
 			{
-				engine.ExitFail($"Failed to retrieve view: {ex.Message}");
+				engine.ExitFail($"Failed to retrieve view: {ex.Message}. Please verify the view name/ID exists and try again.");
 			}
 		}
 	}
