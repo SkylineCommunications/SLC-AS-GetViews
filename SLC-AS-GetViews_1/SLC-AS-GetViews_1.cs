@@ -96,11 +96,6 @@ namespace SLC_AS_GetViews_1
 		/// <param name="currentDepth">Current recursion depth.</param>
 		private void ProcessViews(IEngine engine, IEnumerable<IDmsView> views, int maxDepth, int currentDepth)
 		{
-			if (currentDepth >= maxDepth)
-			{
-				return;
-			}
-
 			string indentation = new string(' ', currentDepth * 2);
 
 			foreach (var view in views)
