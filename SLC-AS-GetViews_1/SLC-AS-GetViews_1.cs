@@ -71,8 +71,16 @@ namespace SLC_AS_GetViews_1
 		/// <param name="engine">Link with SLAutomation process.</param>
 		public void Run(IEngine engine)
 		{
+			// Get and validate RootView parameter
 			string rootViewString = engine.GetScriptParam("RootView").Value;
-			string recursionLevelString = engine.GetScriptParam("RecursionLevel").Value;
+			if (string.IsNullOrWhiteSpace(rootViewString))
+			{
+				engine.GenerateInformation("Error: RootView parameter is required and cannot be empty.");
+				return;
+			}
+
+			// Get RecursionLevel parameter with safe handling
+			string recursionLevelString = engine.GetScriptParam("RecursionLevel")?.Value ?? string.Empty;
 
 			// Parse recursion level, default to 1 if not specified or invalid
 			if (!int.TryParse(recursionLevelString, out int recursionLevel) || recursionLevel < 1)
