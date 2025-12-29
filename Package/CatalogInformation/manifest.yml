@@ -25,7 +25,7 @@ type: Automation
 # If the ID is filled in but does not exist yet, a new Catalog item will be registered with this ID.
 # If the ID is filled in but does exist, properties of the item will be overwritten.
 #   Must be a valid GUID.
-id: d45feb02-8f80-46e4-9599-6909eec3af66
+id: 7f6d6a10-1bf1-43de-986f-b0fb57de803b
 
 # [Required] 
 # The human-friendly name of the Catalog item. 
@@ -33,7 +33,7 @@ id: d45feb02-8f80-46e4-9599-6909eec3af66
 #   Max length: 100 characters.
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
-title: SLC-AS-GetViews
+title: List Views
 
 # [Optional]
 # General information about the Catalog item.
@@ -60,8 +60,8 @@ documentation_url:
 #   The name is required; max 256 characters.
 #   The email and url are optional, and should be in valid email/URL formats.
 owners:
-  - name: ''
-    email: 
+  - name: 'Jarno Lernou'
+    email: 'jarno.lernou@skyline.be'
     url: 
 
 # [Optional]
@@ -71,8 +71,8 @@ owners:
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
 tags:
-  - 
-  - 
+  - Views
+  - Recursion
 
 # [Optional]
 # The ID of the vendor.
