@@ -1,18 +1,13 @@
 # SLC-AS-GetViews
 
-This script will ask for three script parameters:
+This repository contains an Automation script that retrieves and displays the hierarchical structure of DataMiner views, allowing users to explore view relationships up to a specified recursion level.
 
-- RootView: Name or ID of the view for which the subviews will be returned.
-- RootViewInputType: Indicates whether the RootView parameter is a "Name" or "ID". (Default: Name)
-- RecursionLevel: The level of recursion for retrieving subviews (number). Specifying '1' shows direct subviews, '2' goes one level deeper, etc. Defaults to 1 if not specified or invalid.
+## Projects Overview
 
-## Logic
+- [SLC-AS-GetViews](SLC-AS-GetViews/README.md) - Automation script that retrieves and lists subviews under a specified root view with configurable recursion depth.
 
-The script will log in information events a list of views that are under the specified root view, up to the specified recursion level. The name and ID of each view are logged with indentation to show the hierarchy level.
-
-The script supports both view names and view IDs as input. Use the RootViewInputType parameter to specify which type of input you are providing:
-- Set to "Name" to use a view name (e.g., "My View")
-- Set to "ID" to use a view ID (e.g., "123")
+> [!TIP]
+> This repository is available in the Catalog: [List Views | Catalog | dataminer.services](https://catalog.dataminer.services/details/7f6d6a10-1bf1-43de-986f-b0fb57de803b)
 
 ## Future Implementation Ideas
 
