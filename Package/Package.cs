@@ -16,7 +16,9 @@ using System;
 using Skyline.AppInstaller;
 using Skyline.DataMiner.Automation;
 using Skyline.DataMiner.Net.AppPackages;
+using Skyline.DataMiner.Net.ServiceManager.Objects;
 
+using SLNetMessages = Skyline.DataMiner.Net.Messages;
 /// <summary>
 /// DataMiner Script Class.
 /// </summary>
@@ -39,7 +41,44 @@ internal class Script
 
 			////string setupContentPath = installer.GetSetupContentDirectory();
 
-			// Custom installation logic can be added here for each individual install package.
+			SLNetMessages.SetScriptMemoryValuesMessage setMemoryMessage = new SLNetMessages.SetScriptMemoryValuesMessage
+			{
+				Name = "View Input Type",
+				Values = new SLNetMessages.ScriptMemoryValue[]
+				{
+					new SLNetMessages.ScriptMemoryValue()
+					{
+						Position = 0,
+						Description = "Name of View",
+						Value = new SLNetMessages.ParameterValue
+						{
+							ValueType = SLNetMessages.ParameterValueType.String,
+							StringValue = "Name",
+							DoubleValue = 0,
+						},
+					},
+					new SLNetMessages.ScriptMemoryValue()
+					{
+						Position = 1,
+						Description = "ID of View",
+						Value = new SLNetMessages.ParameterValue
+						{
+							ValueType = SLNetMessages.ParameterValueType.String,
+							StringValue = "ID",
+							DoubleValue = 1,
+						},
+					},
+				},
+			};
+
+			try
+			{
+				SLNetMessages.SetScriptMemoryValuesMessage resp = engine.SendSLNetSingleResponseMessage(setMemoryMessage) as SLNetMessages.SetScriptMemoryValuesMessage;
+							}
+			catch (Exception e )
+			{
+				engine.GenerateInformation($"Failed to set Script Memory Values: {e}");
+			}
 		}
 		catch (Exception e)
 		{
