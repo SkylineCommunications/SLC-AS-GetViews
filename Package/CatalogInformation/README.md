@@ -1,7 +1,3 @@
-# Package
-
-![WIP](./Images/wip.png)
-
 # List Views
 
 ## About
@@ -36,8 +32,5 @@ When investigating issues related to specific views or debugging automation scri
 
 ## Prerequisites
 
-- **DataMiner version**: 10.0.0.0 or higher (Main Release) / 10.0.1 or higher (Feature Release)
+- **DataMiner version**: 10.4 or higher (Main Release)
 - **User permissions**: Read access to views in the DataMiner system
-
-> [!NOTE]
-> For more technical details about the script implementation and input parameters, refer to the [project README](https://github.com/SkylineCommunications/SLC-AS-GetViews/blob/main/SLC-AS-GetViews/README.md) in the source code repository.

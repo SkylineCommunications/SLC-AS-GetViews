@@ -26,3 +26,17 @@ This Automation script retrieves and displays the hierarchical structure of Data
 ## Project Type
 
 **Automation Script** - This is a standard DataMiner Automation script as indicated by the DMSScript XML file structure.
+
+## Use Cases
+
+### Unknown View Handling
+If you specify a view that doesn't exist in the DataMiner system:
+- **By Name**: The script will throw an exception and exit with a failure message: "Failed to retrieve view: {exception message}. Please verify the view name/ID exists and try again."
+- **By ID**: The script will throw an exception and exit with the same failure message.
+
+### Invalid Input Handling
+- **Invalid ID format**: If RootViewInputType is set to "ID" but RootView contains non-numeric characters, the script exits with: "Invalid View ID: '{input}'. Please provide a numeric ID (e.g., 123)."
+- **Empty RootView**: If no RootView is provided, the script exits with: "RootView parameter is required. Please provide a view name or ID."
+- **Mismatched input type**: If you provide an ID but set RootViewInputType to "Name", the script will attempt to find a view with that ID as its name. If no view has that name, it will fail with the view not found error. The same applies in reverse - providing a name with RootViewInputType set to "ID" will fail with an invalid ID format error.
+
+**Recommendation**: Ensure that the provided view name or ID exists in your DataMiner system and that the RootViewInputType matches your input format. You can verify view names and IDs through the DataMiner Surveyor or other management tools.
