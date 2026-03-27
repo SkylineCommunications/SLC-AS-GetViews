@@ -2,18 +2,15 @@
 
 ## About
 
-The **List Views** Automation script provides an easy and efficient way to explore the hierarchical structure of DataMiner views. Whether you need to understand how your views are organized or quickly identify all subviews under a specific parent view, this script delivers the information in a clear, indented format that reflects the view hierarchy.
+The **List Views** automation script provides an easy and efficient way to explore the hierarchical structure of DataMiner views. Whether you need to understand how your views are organized or quickly identify all subviews under a specific parent view, this script delivers the information in a clear, indented format that reflects the view hierarchy.
 
 This script is particularly useful for **DataMiner administrators and engineers** who need to audit view structures, troubleshoot view-related issues, or document the organization of their DataMiner system. By supporting both view names and IDs as input, it offers flexibility for different workflows and use cases.
 
 ## Key Features
 
 - **Flexible Input Options**: Accept either view names or view IDs, making it easy to query views regardless of how you reference them in your system.
-
 - **Configurable Recursion Depth**: Control how deep the script traverses the view hierarchy, from direct children to multiple levels deep.
-
 - **Clear Hierarchical Display**: View information is logged with indentation that visually represents the hierarchy level, making it easy to understand parent-child relationships at a glance.
-
 - **Comprehensive View Information**: Retrieve both the name and ID of each view in the hierarchy for complete documentation.
 
 ## Use Cases
@@ -24,7 +21,7 @@ When managing large DataMiner systems with complex view hierarchies, administrat
 
 ### Documentation and Reporting
 
-Generate structured documentation of your view hierarchy for compliance, handover documentation, or system architecture reviews. The indented format makes it easy to copy the output into documentation or share with team members.
+Generate structured documentation of your view hierarchy for compliance, handover documentation, or system architecture reviews. The indented format makes it easy to copy the output into documentation or share it with team members.
 
 ### Troubleshooting View Issues
 
@@ -32,5 +29,5 @@ When investigating issues related to specific views or debugging automation scri
 
 ## Prerequisites
 
-- **DataMiner version**: 10.4 or higher (Main Release)
+- **DataMiner version**: Main Release 10.4 or higher
 - **User permissions**: Read access to views in the DataMiner system
