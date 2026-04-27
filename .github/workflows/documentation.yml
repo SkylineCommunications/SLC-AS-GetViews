@@ -14,6 +14,9 @@ jobs:
   build_job:
     runs-on: ubuntu-latest
     name: Build Job
+    defaults:
+      run:
+        working-directory: Documentation
     steps:
       - uses: actions/checkout@v6
         with:
@@ -31,37 +34,35 @@ jobs:
       - name: Building
         run: dotnet build
 
-      #- name: publish results
-      #  uses: actions/upload-artifact@v4
-      #  with:
-      #    name: Documentation
-      #    path: _site/
-
-      #- uses: actions/download-artifact@v4
-      #  with:
-      #    name: Documentation
-      #    path: DummyScript/CompanionFiles/Skyline DataMiner/Webpages/Public/Documentation
-
   deploy_job:
     runs-on: ubuntu-latest
     name: Deploy Job
     needs: build_job
     env:
       DATAMINER_DEPLOY_KEY: ${{ secrets.DATAMINER_DEPLOY_KEY }}
+    if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
+    defaults:
+      run:
+        working-directory: Documentation
 
     steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+
       - name: Install .NET Tools
-        if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
         run: |
           dotnet tool install -g Skyline.DataMiner.CICD.Tools.CatalogUpload
           dotnet tool install -g Skyline.DataMiner.CICD.Tools.DataMinerDeploy
 
+      - name: Build Documentation project
+        run: dotnet build
+
       - name: Upload package to Catalog
-        if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
+        id: uploadSkyline
         run: |
-          ARTIFACT=$(find "${{ github.workspace }}/Documentation/bin/Debug" -name "*.dmapp" | head -n 1)
+          ARTIFACT=$(find bin/Debug -name "*.dmapp" | head -n 1)
           echo "id=$(dataminer-catalog-upload --path-to-artifact "$ARTIFACT" --dm-catalog-token "${{ secrets.DATAMINER_DEPLOY_KEY }}")" >> $GITHUB_OUTPUT
 
       - name: Deploy package from Catalog
-        if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
         run: dataminer-package-deploy from-volatile --artifact-id "${{ steps.uploadSkyline.outputs.id }}" --dm-system-token "${{ secrets.DATAMINER_DEPLOY_KEY }}"
