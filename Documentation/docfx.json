@@ -1,0 +1,40 @@
+{
+  "build": {
+    "content": [
+      {
+        "files": [
+          "articles/**.md",
+          "articles/**/toc.yml",
+          "toc.yml",
+          "*.md"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "dest": "./PackageContent/CompanionFiles/Skyline DataMiner/Webpages/Public/Documentation",
+    "globalMetadata": {
+      "_appTitle": "List View Documentation",
+      "_appFooter": "© Skyline Communications 2026",
+      "_enableSearch": true,
+      "_enableNewTab": true
+    },
+    "globalMetadataFiles": [],
+    "fileMetadataFiles": [],
+    "template": [
+      "default",
+      "templates/skyfx"
+    ],
+    "postProcessors": [ "ExtractSearchIndex" ],
+    "markdownEngineName": "markdig",
+    "noLangKeyword": false,
+    "keepFileLink": false,
+    "cleanupCacheHistory": false,
+    "disableGitFeatures": false
+  }
+}
