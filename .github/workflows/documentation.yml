@@ -48,18 +48,20 @@ jobs:
     needs: build_job
     env:
       DATAMINER_DEPLOY_KEY: ${{ secrets.DATAMINER_DEPLOY_KEY }}
-    if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
 
     steps:
-      - name: Install .NET Tools        
+      - name: Install .NET Tools
+        if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
         run: |
           dotnet tool install -g Skyline.DataMiner.CICD.Tools.CatalogUpload
           dotnet tool install -g Skyline.DataMiner.CICD.Tools.DataMinerDeploy
 
       - name: Upload package to Catalog
+        if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
         run: |
           ARTIFACT=$(find "${{ github.workspace }}/Documentation/bin/Debug" -name "*.dmapp" | head -n 1)
           echo "id=$(dataminer-catalog-upload --path-to-artifact "$ARTIFACT" --dm-catalog-token "${{ secrets.DATAMINER_DEPLOY_KEY }}")" >> $GITHUB_OUTPUT
 
       - name: Deploy package from Catalog
+        if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
         run: dataminer-package-deploy from-volatile --artifact-id "${{ steps.uploadSkyline.outputs.id }}" --dm-system-token "${{ secrets.DATAMINER_DEPLOY_KEY }}"
