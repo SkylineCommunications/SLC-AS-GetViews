@@ -64,7 +64,7 @@ jobs:
         id: uploadSkyline
         if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
         run: |
-          ARTIFACT=$(find bin/Debug -name "*.dmapp" | head -n 1)
+          ARTIFACT=$(find bin/Debug -name "*.dmapp" -exec realpath {} \; | head -n 1)
           UPLOAD_OUTPUT=$(dataminer-catalog-upload --path-to-artifact "$ARTIFACT" --dm-catalog-token "${{ secrets.DATAMINER_DEPLOY_KEY }}")
           echo "id=$UPLOAD_OUTPUT" >> $GITHUB_OUTPUT
 
