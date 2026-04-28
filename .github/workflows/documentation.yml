@@ -36,7 +36,7 @@ jobs:
       HAS_DATAMINER_DEPLOY_KEY: ${{ steps.check.outputs.DATAMINER_DEPLOY_KEY }}
     steps:
       - run: >
-          echo "::set-output name=DATAMINER_DEPLOY_KEY::${{ env.DATAMINER_DEPLOY_KEY != '' }}";
+          echo "DATAMINER_DEPLOY_KEY=${{ env.DATAMINER_DEPLOY_KEY != '' }}" >> $GITHUB_OUTPUT
         id: check
         env:
           DATAMINER_DEPLOY_KEY: ${{ secrets.DATAMINER_DEPLOY_KEY }}
