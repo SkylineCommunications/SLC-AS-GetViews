@@ -23,5 +23,8 @@
 		<PackageReference Include="Skyline.DataMiner.Utils.SecureCoding.Analyzers" Version="2.2.3">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<!-- Pinned to resolve MSB3277 conflict: Skyline.DataMiner.Sdk injects v1.7.1 as a file reference,
+			 while Nito/SLNetTypes/SLManagedAutomation require v5.0.0.0. Pinning to v8.0.0 satisfies all. -->
+		<PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
 	</ItemGroup>
 </Project>

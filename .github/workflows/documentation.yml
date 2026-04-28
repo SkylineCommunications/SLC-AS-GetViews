@@ -27,11 +27,11 @@ jobs:
         env:
           CI: true
 
-      - name: build documentation
+      - name: build documentation (docfx)
         run: |
           docfx build --warningsAsErrors
 
-      - name: Building
+      - name: build documentation project (dotnet)
         run: dotnet build
 
   deploy_job:
@@ -61,10 +61,12 @@ jobs:
         run: dotnet build
 
       - name: Upload package to Catalog
+        id: uploadSkyline
         if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
         run: |
           ARTIFACT=$(find bin/Debug -name "*.dmapp" | head -n 1)
-          echo "id=$(dataminer-catalog-upload --path-to-artifact "$ARTIFACT" --dm-catalog-token "${{ secrets.DATAMINER_DEPLOY_KEY }}")" >> $GITHUB_OUTPUT
+          UPLOAD_OUTPUT=$(dataminer-catalog-upload --path-to-artifact "$ARTIFACT" --dm-catalog-token "${{ secrets.DATAMINER_DEPLOY_KEY }}")
+          echo "id=$UPLOAD_OUTPUT" >> $GITHUB_OUTPUT
 
       - name: Deploy package from Catalog
         if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
