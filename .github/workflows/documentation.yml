@@ -46,6 +46,10 @@ jobs:
           submodules: true
         if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
 
+      - name: install DocFX
+        if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
+        run: dotnet tool update -g docfx
+
       - name: Install .NET Tools
         if: ${{ env.DATAMINER_DEPLOY_KEY != '' }}
         run: |
