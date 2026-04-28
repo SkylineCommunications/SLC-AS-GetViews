@@ -3,8 +3,8 @@
 		"content": [
 			{
 				"files": [
-					"articles/**.md",
-					"articles/**/toc.yml",
+					"Documentation/**.md",
+					"Documentation/**/toc.yml",
 					"toc.yml",
 					"*.md"
 				]
@@ -13,7 +13,7 @@
 		"resource": [
 			{
 				"files": [
-					"images/**"
+					"Documentation/images/**"
 				]
 			}
 		],
