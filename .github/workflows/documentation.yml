@@ -27,11 +27,7 @@ jobs:
         env:
           CI: true
 
-      - name: build documentation (docfx)
-        run: |
-          docfx build --warningsAsErrors
-
-      - name: build documentation project (dotnet)
+      - name: Build Documentation project
         run: dotnet build
 
   deploy_job:

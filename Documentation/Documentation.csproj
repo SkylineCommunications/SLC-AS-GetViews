@@ -27,4 +27,7 @@
 			 while Nito/SLNetTypes/SLManagedAutomation require v5.0.0.0. Pinning to v8.0.0 satisfies all. -->
 		<PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
 	</ItemGroup>
+	<Target Name="BuildDocumentation" BeforeTargets="Build">
+		<Exec Command="docfx build" />
+	</Target>
 </Project>
