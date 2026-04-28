@@ -36,6 +36,7 @@
 		"keepFileLink": false,
 		"cleanupCacheHistory": false,
 		"disableGitFeatures": false,
+		"markdownEngineName": "markdig",
 		"markdownEngineProperties": {
 			"plantUml": {
 				"outputFormat": "svg",
