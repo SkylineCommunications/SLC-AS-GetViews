@@ -58,13 +58,13 @@ jobs:
       - name: install DocFX
         run: dotnet tool update -g docfx
 
+      - name: Build Documentation project
+        run: dotnet build
+
       - name: Install .NET Tools
         run: |
           dotnet tool install -g Skyline.DataMiner.CICD.Tools.CatalogUpload
           dotnet tool install -g Skyline.DataMiner.CICD.Tools.DataMinerDeploy
-
-      - name: Build Documentation project
-        run: dotnet build
 
       - name: Upload package to Catalog
         id: uploadSkyline
