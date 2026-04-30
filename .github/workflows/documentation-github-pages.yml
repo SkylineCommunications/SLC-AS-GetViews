@@ -48,7 +48,8 @@ jobs:
       - name: Identify Static Website Path
         id: identifyPath
         run: |
-          PATH_SITE=$(find bin/Debug -name "*.dmapp" -exec realpath {} \; | head -n 1)
+          DEST=$(jq -r '.build.dest' docfx.json)
+          PATH_SITE=$(realpath "$DEST")
           echo "Static site found at: $PATH_SITE"
           echo "PATH_SITE=$PATH_SITE" >> $GITHUB_OUTPUT
 
