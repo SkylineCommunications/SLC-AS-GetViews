@@ -49,13 +49,13 @@ jobs:
         id: identifyPath
         run: |
           PATH_SITE=$(find bin/Debug -name "*.dmapp" -exec realpath {} \; | head -n 1)
-          echo "Artifact found at: $PATH_SITE"
-          echo "ARTIFACT=$PATH_SITE" >> $GITHUB_OUTPUT
+          echo "Static site found at: $PATH_SITE"
+          echo "PATH_SITE=$PATH_SITE" >> $GITHUB_OUTPUT
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ steps.identifyPath.outputs.ARTIFACT }}
+          path: ${{ steps.identifyPath.outputs.PATH_SITE }}
 
   check_secrets:
     runs-on: ubuntu-latest
