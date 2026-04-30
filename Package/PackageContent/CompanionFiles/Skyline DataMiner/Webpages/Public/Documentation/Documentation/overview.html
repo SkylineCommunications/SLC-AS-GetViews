@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="google-site-verification" content="qrBmzaufiDAyVa6i0OWE6A1kSl8TMnCFIOydFvyTnKU">
+    <meta charset="utf-8">
+      <title>Overview | List View Documentation </title>
+      <base>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Overview | List View Documentation ">
+      <meta name="generator" content="docfx ">
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/SkylineCommunications/SLC-AS-GetViews/blob/AddDocumentationProjectInPackage/Package/Documentation/overview.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+	</head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="logo_main" src="../logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl" id="main">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="overview">
+<h1 id="overview">Overview</h1>
+
+<p>The <strong>SLC-AS-GetViews</strong> script is a DataMiner Automation script that retrieves and displays the hierarchical structure of views within a DataMiner System (DMS). Starting from a specified root view, it traverses the child view hierarchy and logs each view's name and ID with indentation that visually reflects the depth of each view in the tree.</p>
+<p>This script is intended for <strong>DataMiner administrators and engineers</strong> who need a quick, structured snapshot of how views are organized in their system.</p>
+<h2 id="key-features">Key Features</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Flexible input</strong></td>
+<td>Accept a root view by either its <strong>name</strong> or its <strong>ID</strong>, controlled by the <code>RootViewInputType</code> parameter.</td>
+</tr>
+<tr>
+<td><strong>Configurable depth</strong></td>
+<td>Control how many levels deep the traversal goes with the <code>RecursionLevel</code> parameter. Default is <code>1</code> (direct children only).</td>
+</tr>
+<tr>
+<td><strong>Indented output</strong></td>
+<td>Each view is logged with indentation proportional to its depth, making the hierarchy immediately readable in the DataMiner log output.</td>
+</tr>
+<tr>
+<td><strong>Comprehensive info</strong></td>
+<td>Each logged line includes both the view <strong>name</strong> and its numeric <strong>ID</strong> for unambiguous identification.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="input-parameters-at-a-glance">Input Parameters at a Glance</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RootView</code></td>
+<td>Text</td>
+<td><em>(required)</em></td>
+<td>The name or ID of the view to start from.</td>
+</tr>
+<tr>
+<td><code>RootViewInputType</code></td>
+<td>Choice</td>
+<td><code>Name</code></td>
+<td>Whether <code>RootView</code> is interpreted as a <code>Name</code> or an <code>ID</code>.</td>
+</tr>
+<tr>
+<td><code>RecursionLevel</code></td>
+<td>Number</td>
+<td><code>1</code></td>
+<td>How many levels of child views to traverse.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="use-cases">Use Cases</h2>
+<h3 id="view-structure-auditing">View Structure Auditing</h3>
+<p>When managing a large DMS with a complex view hierarchy, you can use this script to quickly generate a map of any branch of the view tree — making it easy to spot structural inconsistencies or document the current state.</p>
+<h3 id="documentation-and-reporting">Documentation and Reporting</h3>
+<p>The indented log output can be copied directly into system architecture documentation or handed over during system transitions. Combined with the <code>RecursionLevel</code> parameter, you can scope the output to exactly the depth you need.</p>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>When debugging Automation scripts that reference specific views by name or ID, this script lets you quickly verify that a given view exists, confirm its exact ID, and inspect its children without navigating through the DataMiner Cube UI.</p>
+
+</article>
+
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+        
+      </div>
+
+      <div class="affix">
+        <div class="contribution d-print-none">
+          <a href="https://github.com/SkylineCommunications/SLC-AS-GetViews/blob/AddDocumentationProjectInPackage/Package/Documentation/overview.md/#L1" class="edit-link">Improve this page</a>
+        </div>
+        <nav id="affix"></nav>
+      </div>
+    </main>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          © Skyline Communications 2026
+        </div>
+		<div><span class="pull-right"><a class="backtotoplink" href="#top">Back to top</a></span></div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+      const params = new URLSearchParams(window.location.search);
+      const embedFlag = params?.get('embed') ?? '';
+      if (embedFlag === 'true') {
+        document.querySelector('head base')?.setAttribute('target', '_parent');
+        document.body.classList.add('embed');
+      } else {
+        document.querySelector('head base')?.removeAttribute('target');
+        document.body.classList.remove('embed');
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="google-site-verification" content="qrBmzaufiDAyVa6i0OWE6A1kSl8TMnCFIOydFvyTnKU">
+    <meta charset="utf-8">
+      <title>Getting Started with Skyline DataMiner DevOps | List View Documentation </title>
+      <base>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Getting Started with Skyline DataMiner DevOps | List View Documentation ">
+      <meta name="generator" content="docfx ">
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      
+      <link rel="icon" href="favicon.ico">
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/SkylineCommunications/SLC-AS-GetViews/blob/AddDocumentationProjectInPackage/Package/GettingStarted.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+	</head>
+
+  <script type="module" src="./public/docfx.min.js"></script>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo" class="logo_main" src="logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl" id="main">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="getting-started-with-skyline-dataminer-devops">Getting Started with Skyline DataMiner DevOps</h1>
+
+<p>Welcome to the Skyline DataMiner DevOps environment!
+This quick-start guide will help you get up and running.
+For more details and comprehensive instructions, please visit <a href="https://docs.dataminer.services/">DataMiner Docs</a>.</p>
+<h2 id="creating-a-dataminer-application-package">Creating a DataMiner application package</h2>
+<p>This project is configured to create a .dmapp file every time you build the project.</p>
+<p>When you compile or build the project, you will find the generated .dmapp in the standard output folder, which is typically the <em>bin</em> folder of your project.</p>
+<p>When you publish the project, a corresponding item will be created in the online DataMiner Catalog.</p>
+<h2 id="adding-extra-artifacts-in-the-same-solution">Adding extra artifacts in the same solution</h2>
+<p>You can right-click the solution and select <em>Add</em> &gt; <em>New Project</em>. This will allow you to select DataMiner project templates (e.g. adding additional Automation scripts).</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Connectors are currently not supported for this.</p>
+</div>
+<p>You can also add new projects by using the dotnet-cli. For the sake of stability, we recommend always using an <em>sln</em> solution with all projects included.</p>
+<pre><code class="lang-bash">    dotnet new sln
+    dotnet new dataminer-user-defined-api-project -o MyUserDefinedApiFromGithub -auth MyName
+    dotnet sln add MyUserDefinedApiFromGithub
+</code></pre>
+<p>Every <em>Skyline.DataMiner.SDK</em> project within the solution, except other DataMiner package projects, will by default be included within the .dmapp created by this project. You can customize this behavior using the <em>PackageContent/ProjectReferences.xml</em> file. This allows you to add filters to include or exclude projects as needed.</p>
+<h2 id="importing-from-dataminer">Importing from DataMiner</h2>
+<p>You can import specific items directly from a DataMiner Agent using DIS:</p>
+<ol>
+<li><p>In Visual Studio, connect to an Agent via <em>Extensions</em> &gt; <em>DIS</em> &gt; <em>DMA</em> &gt; <em>Connect</em>.</p>
+</li>
+<li><p>If your Agent is not listed, add it by going to <em>Extensions</em> &gt; <em>DIS</em> &gt; <em>Settings</em> and clicking <em>Add</em> on the DMA tab.</p>
+</li>
+<li><p>Once connected, import the DataMiner artifacts you want:</p>
+<ol>
+<li>In your <em>Solution Explorer</em>, navigate to folders such as <em>PackageContent/Dashboards</em> or <em>PackageContent/LowCodeApps</em>.</li>
+<li>Right-click, and select <em>Add</em>.</li>
+<li>Select e.g. <em>Import DataMiner Dashboard/Low-Code App</em>, depending on what you want to import.</li>
+</ol>
+</li>
+</ol>
+<h2 id="adding-content-from-the-catalog">Adding content from the Catalog</h2>
+<p>You can reference and include additional content from the Catalog using the <em>PackageContent/CatalogReferences.xml</em> file provided in this project.</p>
+<p>For the SDK to be able to download the referenced items from the Catalog, configure a user secret in Visual Studio:</p>
+<ol>
+<li><p>Obtain an <em>Organization Key</em> from <a href="https://admin.dataminer.services/">admin.dataminer.services</a> with the following scopes:</p>
+<ul>
+<li><em>Register catalog items</em></li>
+<li><em>Read catalog items</em></li>
+<li><em>Download catalog versions</em></li>
+</ul>
+</li>
+<li><p>Securely store the key using Visual Studio User Secrets:</p>
+<ol>
+<li><p>Right-click the project and select <em>Manage User Secrets</em>.</p>
+</li>
+<li><p>Add the key in the following format:</p>
+<pre><code class="lang-json">{ 
+  &quot;skyline&quot;: {
+    &quot;sdk&quot;: {
+      &quot;dataminertoken&quot;: &quot;MyKeyHere&quot;
+    }
+  }
+}
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="executing-additional-code-on-installation">Executing additional code on installation</h2>
+<p>Open the <code>Package.cs</code> file to write custom installation code. Common actions include creating elements, services, or views.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Type <code>clGetDms</code> in the .cs file and press Tab twice to insert a snippet that gives you access to the <em>IDms</em> classes, making DataMiner manipulation easier.</p>
+</div>
+<h2 id="adding-configuration-files">Adding configuration files</h2>
+<p>If your installation code needs configuration files (e.g. .json, .xml), you can add these to the <em>SetupContent</em> folder, which can be accessed during installation.</p>
+<p>Access them in your code using:</p>
+<pre><code class="lang-csharp">string setupContentPath = installer.GetSetupContentDirectory();
+</code></pre>
+<h2 id="publishing-to-the-catalog">Publishing to the Catalog</h2>
+<p>This project was created with support for publishing to the DataMiner Catalog. You can publish your artifact manually through Visual Studio or by setting up a CI/CD workflow.</p>
+<h2 id="publishing-to-the-catalog-with-the-complete-cicd-workflow">Publishing to the Catalog with the complete CI/CD workflow</h2>
+<p>This project includes a comprehensive GitHub workflow that adheres to Skyline Communications' quality standards, including static code analysis, custom validation, and unit testing.</p>
+<ol>
+<li><p>Make sure you have a <strong>SonarCloud organization</strong>.</p>
+<p>If you do not have one yet, you can create it on <a href="https://sonarcloud.io/create-organization">sonarcloud.io</a>.</p>
+</li>
+<li><p>Create a GitHub repository by going to <em>Git</em> &gt; <em>Create Git Repository</em> in Visual Studio, selecting GitHub, and filling in the wizard before clicking <em>Create and Push</em>.</p>
+</li>
+<li><p>In GitHub, go to the <em>Actions</em> tab.</p>
+</li>
+<li><p>Click the workflow run that failed (usually called <em>Add project files</em>).</p>
+</li>
+<li><p>Click the &quot;build&quot; step that failed and read the failing error.</p>
+<pre><code class="lang-text">Error: DATAMINER_TOKEN is not set. Release not possible!
+Please create or re-use an admin.dataminer.services token by visiting: https://admin.dataminer.services/.
+Navigate to the right organization, then go to Keys and create or find a key with permissions Register catalog items, Download catalog versions, and Read catalog items.
+Copy the value of the token.
+Then set a DATAMINER_TOKEN secret in your repository settings: **Dynamic Link**
+</code></pre>
+<p>You can use the links from the actual error to better address the next couple of steps.</p>
+</li>
+<li><p>Obtain an <strong>organization key</strong> from <a href="https://admin.dataminer.services/">admin.dataminer.services</a> with the following scopes:</p>
+<ul>
+<li><em>Register catalog items</em></li>
+<li><em>Read catalog items</em></li>
+<li><em>Download catalog versions</em></li>
+</ul>
+</li>
+<li><p>Add the key as a secret in your GitHub repository, by navigating to <em>Settings</em> &gt; <em>Secrets and variables</em> &gt; <em>Actions</em> and creating secrets or variables with the required names.</p>
+</li>
+<li><p>Re-run the workflow.</p>
+</li>
+</ol>
+<p>The following secrets and variables will have been added to your repository after all issues are resolved:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Setup Guide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DATAMINER_TOKEN</code></td>
+<td>Secret</td>
+<td>Organization key for downloading/publishing from/to the Catalog</td>
+<td>Obtain from <a href="https://admin.dataminer.services/">admin.dataminer.services</a> and add it as a secret.</td>
+</tr>
+<tr>
+<td><code>SONAR_TOKEN</code></td>
+<td>Secret</td>
+<td>Token for SonarCloud authentication</td>
+<td>Obtain from <a href="https://sonarcloud.io/account/security">SonarCloud Security</a> and add it as a secret.</td>
+</tr>
+<tr>
+<td><code>SONAR_NAME</code></td>
+<td>Variable</td>
+<td>SonarCloud project ID</td>
+<td>Visit <a href="https://sonarcloud.io/projects/create">SonarCloud</a>, copy the project ID, and add it as a variable.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="releasing-a-version">Releasing a version</h3>
+<ol>
+<li><p>Navigate to the <em>&lt;&gt; Code</em> tab in your GitHub repository.</p>
+</li>
+<li><p>In the menu on the right, select <em>Releases</em>.</p>
+</li>
+<li><p>Create a new release, select the desired version as a <strong>tag</strong>, and provide a title and description.</p>
+</li>
+</ol>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The description will be visible in the DataMiner Catalog.</p>
+</div>
+
+</article>
+
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+        
+      </div>
+
+      <div class="affix">
+        <div class="contribution d-print-none">
+          <a href="https://github.com/SkylineCommunications/SLC-AS-GetViews/blob/AddDocumentationProjectInPackage/Package/GettingStarted.md/#L1" class="edit-link">Improve this page</a>
+        </div>
+        <nav id="affix"></nav>
+      </div>
+    </main>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          © Skyline Communications 2026
+        </div>
+		<div><span class="pull-right"><a class="backtotoplink" href="#top">Back to top</a></span></div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+      const params = new URLSearchParams(window.location.search);
+      const embedFlag = params?.get('embed') ?? '';
+      if (embedFlag === 'true') {
+        document.querySelector('head base')?.setAttribute('target', '_parent');
+        document.body.classList.add('embed');
+      } else {
+        document.querySelector('head base')?.removeAttribute('target');
+        document.body.classList.remove('embed');
+      }
+    </script>
+  </body>
+</html>
