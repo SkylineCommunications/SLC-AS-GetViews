@@ -28,7 +28,7 @@ jobs:
     name: Build Job
     defaults:
       run:
-        working-directory: Documentation
+        working-directory: Package
     steps:
       - uses: actions/checkout@v6
         with:
@@ -91,7 +91,7 @@ jobs:
     if: needs.check_secrets.outputs.HAS_DATAMINER_DEPLOY_KEY == 'true'
     defaults:
       run:
-        working-directory: Documentation
+        working-directory: Package
 
     steps:
       - uses: actions/checkout@v6
