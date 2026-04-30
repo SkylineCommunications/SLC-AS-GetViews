@@ -3,12 +3,24 @@ name: Build and Deploy Documentation
 on:
   push:
     branches:
-      - main
+      - AddDocumentationProject
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
-      - main
+      - AddDocumentationProject
   workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build_job:
@@ -22,6 +34,9 @@ jobs:
         with:
           submodules: true
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
       - name: install DocFX
         run: dotnet tool update -g docfx
         env:
@@ -30,7 +45,21 @@ jobs:
       - name: Build Documentation project
         run: dotnet build
 
-  secrets:
+      - name: Identify Static Website Path
+        id: identifyPath
+        run: |
+          DEST=$(jq -r '.build.dest' docfx.json)
+          PATH_SITE=$(realpath "$DEST")
+          echo "Static site found at: $PATH_SITE"
+          echo "PATH_SITE=$PATH_SITE" >> $GITHUB_OUTPUT
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.identifyPath.outputs.PATH_SITE }}
+
+  check_secrets:
+    name: Check Secrets - DataMiner Deploy Key
     runs-on: ubuntu-latest
     outputs:
       HAS_DATAMINER_DEPLOY_KEY: ${{ steps.check.outputs.DATAMINER_DEPLOY_KEY }}
@@ -41,11 +70,25 @@ jobs:
         env:
           DATAMINER_DEPLOY_KEY: ${{ secrets.DATAMINER_DEPLOY_KEY }}
 
-  deploy_job:
+
+  # Deployment job
+  deploy_githubpages:
+    name: Deploy to GitHub Pages
+    environment:
+      name: Deploy to GitHub Pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    name: Deploy Job
-    needs: ["build_job", "secrets"]
-    if: needs.secrets.outputs.HAS_DATAMINER_DEPLOY_KEY == 'true'
+    needs: build_job
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+  deploy_dataminer:
+    runs-on: ubuntu-latest
+    name: Deploy to DataMiner
+    needs: ["build_job", "check_secrets"]
+    if: needs.check_secrets.outputs.HAS_DATAMINER_DEPLOY_KEY == 'true'
     defaults:
       run:
         working-directory: Documentation
