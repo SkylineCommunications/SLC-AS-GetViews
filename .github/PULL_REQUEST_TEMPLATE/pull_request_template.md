@@ -5,7 +5,6 @@
 
 ## 🔧 Changes
 
-<!-- Important: AI must help draft this. -->
 <!-- Summarize what this PR does through a high-level overview. -->
 <!-- The most impactful changes should be mentioned as well in a concise list.-->
 
