@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="google-site-verification" content="qrBmzaufiDAyVa6i0OWE6A1kSl8TMnCFIOydFvyTnKU">
+    <meta charset="utf-8">
+      <title>Contributing | List View Documentation </title>
+      <base>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Contributing | List View Documentation ">
+      <meta name="generator" content="docfx ">
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/SkylineCommunications/SLC-AS-GetViews/blob/AddDocumentationProjectInPackage/Package/Documentation/contributing.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+	</head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="logo_main" src="../logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl" id="main">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="contributing">
+<h1 id="contributing">Contributing</h1>
+
+<p>Thank you for contributing to <strong>SLC-AS-GetViews</strong>. This page describes how to set up your development environment, work with the codebase, and submit changes.</p>
+<h2 id="repository">Repository</h2>
+<p>The source code is hosted on GitHub:
+<a href="https://github.com/SkylineCommunications/SLC-AS-GetViews">https://github.com/SkylineCommunications/SLC-AS-GetViews</a></p>
+<h2 id="branching-convention">Branching Convention</h2>
+<table>
+<thead>
+<tr>
+<th>Branch type</th>
+<th>Naming pattern</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Feature or improvement</td>
+<td><code>Add-&lt;description&gt;</code></td>
+<td><code>Add-Custom-Icon</code></td>
+</tr>
+<tr>
+<td>Bug fix</td>
+<td><code>Fix-&lt;description&gt;</code></td>
+<td><code>Fix-Null-RecursionLevel</code></td>
+</tr>
+<tr>
+<td>Documentation</td>
+<td><code>Docs-&lt;description&gt;</code></td>
+<td><code>Docs-Getting-Started</code></td>
+</tr>
+</tbody>
+</table>
+<p>All work should be done on a dedicated branch. Do not commit directly to <code>main</code>.</p>
+<h2 id="setting-up-locally">Setting Up Locally</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li><strong>Visual Studio</strong> with the <strong>DataMiner Integration Studio (DIS)</strong> extension installed.</li>
+<li>.NET Framework 4.8 SDK.</li>
+<li>Access to a DataMiner Agent (DMA) for live testing.</li>
+</ul>
+<h3 id="steps">Steps</h3>
+<ol>
+<li><p>Clone the repository:</p>
+<pre><code class="lang-bash">git clone https://github.com/SkylineCommunications/SLC-AS-GetViews.git
+</code></pre>
+</li>
+<li><p>Open <code>SLC-AS-GetViews.sln</code> in Visual Studio.</p>
+</li>
+<li><p>Build the solution (<em>Build</em> &gt; <em>Build Solution</em>) to restore NuGet packages and verify there are no compilation errors.</p>
+</li>
+</ol>
+<h2 id="testing-against-a-live-dma">Testing Against a Live DMA</h2>
+<ol>
+<li>In Visual Studio, go to <em>Extensions</em> &gt; <em>DIS</em> &gt; <em>DMA</em> &gt; <em>Connect</em> and select or add your DataMiner Agent.</li>
+<li>Right-click the script project and choose <em>Publish Script</em> (or use <em>DIS</em> &gt; <em>Publish</em>) to deploy the script to the connected DMA.</li>
+<li>Open <strong>DataMiner Cube</strong>, navigate to <em>Apps</em> &gt; <em>Automation</em>, and execute the script with your chosen parameters.</li>
+<li>Verify the output in the <em>Information Events</em> log.</li>
+</ol>
+<h2 id="submitting-a-pull-request">Submitting a Pull Request</h2>
+<ol>
+<li>Make sure all changes compile without errors (<code>Build</code> &gt; <code>Build Solution</code>).</li>
+<li>Keep commits focused — one logical change per commit.</li>
+<li>Write a clear PR description explaining <em>what</em> changed and <em>why</em>.</li>
+<li>Reference any related GitHub issues in the PR description using <code>Closes #&lt;issue-number&gt;</code>.</li>
+<li>Request a review from a project maintainer.</li>
+</ol>
+<h2 id="contributing-to-documentation">Contributing to Documentation</h2>
+<p>Documentation lives in <code>Documentation\articles\</code>. Each article is a Markdown file with a docfx YAML front matter block:</p>
+<pre><code class="lang-markdown">---
+uid: your-article-uid
+---
+
+# Article Title
+</code></pre>
+<p>The <code>uid</code> must match the <code>topicUid</code> entry in <code>Documentation\articles\toc.yml</code>.</p>
+<h3 id="adding-a-new-article">Adding a New Article</h3>
+<ol>
+<li>Create a new <code>.md</code> file in <code>Documentation\articles\</code>.</li>
+<li>Add the <code>uid</code> front matter.</li>
+<li>Add a corresponding entry to <code>toc.yml</code>.</li>
+</ol>
+<h3 id="previewing-documentation-locally">Previewing Documentation Locally</h3>
+<p>If you have <a href="https://dotnet.github.io/docfx/">docfx</a> installed:</p>
+<pre><code class="lang-bash">cd Documentation
+docfx docfx.json --serve
+</code></pre>
+<p>This builds the static site and serves it locally at <code>http://localhost:8080</code> so you can review your changes before pushing.</p>
+
+</article>
+
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+        
+      </div>
+
+      <div class="affix">
+        <div class="contribution d-print-none">
+          <a href="https://github.com/SkylineCommunications/SLC-AS-GetViews/blob/AddDocumentationProjectInPackage/Package/Documentation/contributing.md/#L1" class="edit-link">Improve this page</a>
+        </div>
+        <nav id="affix"></nav>
+      </div>
+    </main>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          © Skyline Communications 2026
+        </div>
+		<div><span class="pull-right"><a class="backtotoplink" href="#top">Back to top</a></span></div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+      const params = new URLSearchParams(window.location.search);
+      const embedFlag = params?.get('embed') ?? '';
+      if (embedFlag === 'true') {
+        document.querySelector('head base')?.setAttribute('target', '_parent');
+        document.body.classList.add('embed');
+      } else {
+        document.querySelector('head base')?.removeAttribute('target');
+        document.body.classList.remove('embed');
+      }
+    </script>
+  </body>
+</html>

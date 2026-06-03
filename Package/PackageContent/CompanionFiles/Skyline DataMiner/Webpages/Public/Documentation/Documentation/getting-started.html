@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="google-site-verification" content="qrBmzaufiDAyVa6i0OWE6A1kSl8TMnCFIOydFvyTnKU">
+    <meta charset="utf-8">
+      <title>Getting Started | List View Documentation </title>
+      <base>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Getting Started | List View Documentation ">
+      <meta name="generator" content="docfx ">
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/SkylineCommunications/SLC-AS-GetViews/blob/AddDocumentationProjectInPackage/Package/Documentation/getting-started.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+	</head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="logo_main" src="../logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl" id="main">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="getting-started">
+<h1 id="getting-started">Getting Started</h1>
+
+<p>This page walks you through everything you need to run the <strong>SLC-AS-GetViews</strong> script for the first time.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Access to a <strong>DataMiner System (DMS)</strong> with at least one view configured.</li>
+<li>The script deployed to your DMS (via the DataMiner Catalog or manually through DIS).</li>
+<li><strong>DataMiner Cube</strong> to execute the script and read its output, or a DataMiner Automation trigger.</li>
+</ul>
+<h2 id="running-the-script">Running the Script</h2>
+<ol>
+<li>Open <strong>DataMiner Cube</strong> and navigate to <em>Apps</em> &gt; <em>Automation</em>.</li>
+<li>Find the script named <strong>SLC-AS-GetViews</strong> in the script list.</li>
+<li>Click <strong>Execute</strong> to open the parameter dialog.</li>
+<li>Fill in the input parameters (see below).</li>
+<li>Click <strong>Execute now</strong>.</li>
+<li>Open the <em>Information Events</em> pane or the Automation script log to view the output.</li>
+</ol>
+<h2 id="input-parameters">Input Parameters</h2>
+<h3 id="rootview">RootView</h3>
+<ul>
+<li><strong>Type</strong>: Text (string)</li>
+<li><strong>Required</strong>: Yes</li>
+<li><strong>Description</strong>: The starting point of the view traversal. Provide either the view's display name or its numeric ID, depending on what you set for <code>RootViewInputType</code>.</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th><code>RootViewInputType</code></th>
+<th><code>RootView</code> value</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Name</code></td>
+<td><code>My Network</code></td>
+<td>Resolves the view named <em>My Network</em></td>
+</tr>
+<tr>
+<td><code>ID</code></td>
+<td><code>123</code></td>
+<td>Resolves the view with ID <em>123</em></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="rootviewinputtype">RootViewInputType</h3>
+<ul>
+<li><strong>Type</strong>: Multiple choice</li>
+<li><strong>Default</strong>: <code>Name</code></li>
+<li><strong>Options</strong>: <code>Name</code>, <code>ID</code></li>
+<li><strong>Description</strong>: Tells the script how to interpret the <code>RootView</code> parameter.</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you set <code>RootViewInputType</code> to <code>ID</code> but provide a non-numeric value, the script will exit with an error. If you set it to <code>Name</code> but provide a numeric string, the script searches for a view whose <em>name</em> matches that string — not its ID.</p>
+</div>
+<hr>
+<h3 id="recursionlevel">RecursionLevel</h3>
+<ul>
+<li><strong>Type</strong>: Number (parsed as integer)</li>
+<li><strong>Default</strong>: <code>1</code></li>
+<li><strong>Description</strong>: Controls how many levels of child views are traversed. A value of <code>1</code> returns only the direct children of the root view. A value of <code>2</code> also returns their children, and so on.</li>
+</ul>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Start with the default of <code>1</code> on large systems. Deep recursion on a root view with many descendants can produce a large volume of log entries.</p>
+</div>
+<h2 id="example-output">Example Output</h2>
+<p>Given a view <em>Operations</em> with ID <code>10</code> containing child views <em>Site A</em> (ID <code>11</code>) and <em>Site B</em> (ID <code>12</code>), each with one child view, running with <code>RecursionLevel = 2</code> produces:</p>
+<pre><code>View: Site A (11)
+  View: Floor 1 (21)
+View: Site B (12)
+  View: Floor 1 (22)
+</code></pre>
+<p>Each level of indentation represents one additional depth level (2 spaces per level).</p>
+<h2 id="known-error-messages">Known Error Messages</h2>
+<table>
+<thead>
+<tr>
+<th>Message</th>
+<th>Cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RootView parameter is required.</code></td>
+<td>The <code>RootView</code> parameter was left empty.</td>
+</tr>
+<tr>
+<td><code>Invalid View ID: '...'. Please provide a numeric ID.</code></td>
+<td><code>RootViewInputType</code> is <code>ID</code> but the value is not a valid integer.</td>
+</tr>
+<tr>
+<td><code>Failed to retrieve view: ... Please verify the view name/ID exists.</code></td>
+<td>No view matching the given name or ID was found in the DMS.</td>
+</tr>
+</tbody>
+</table>
+
+</article>
+
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+        
+      </div>
+
+      <div class="affix">
+        <div class="contribution d-print-none">
+          <a href="https://github.com/SkylineCommunications/SLC-AS-GetViews/blob/AddDocumentationProjectInPackage/Package/Documentation/getting-started.md/#L1" class="edit-link">Improve this page</a>
+        </div>
+        <nav id="affix"></nav>
+      </div>
+    </main>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          © Skyline Communications 2026
+        </div>
+		<div><span class="pull-right"><a class="backtotoplink" href="#top">Back to top</a></span></div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+      const params = new URLSearchParams(window.location.search);
+      const embedFlag = params?.get('embed') ?? '';
+      if (embedFlag === 'true') {
+        document.querySelector('head base')?.setAttribute('target', '_parent');
+        document.body.classList.add('embed');
+      } else {
+        document.querySelector('head base')?.removeAttribute('target');
+        document.body.classList.remove('embed');
+      }
+    </script>
+  </body>
+</html>

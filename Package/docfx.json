@@ -1,0 +1,48 @@
+{
+	"build": {
+		"content": [
+			{
+				"files": [
+					"Documentation/**.md",
+					"Documentation/**/toc.yml",
+					"toc.yml",
+					"*.md"
+				]
+			}
+		],
+		"resource": [
+			{
+				"files": [
+					"Documentation/Images/**"
+				]
+			}
+		],
+		"dest": "./PackageContent/CompanionFiles/Skyline DataMiner/Webpages/Public/Documentation",
+		"globalMetadata": {
+			"_appTitle": "List View Documentation",
+			"_appFooter": "© Skyline Communications 2026",
+			"_enableSearch": true,
+			"_enableNewTab": true
+		},
+		"globalMetadataFiles": [],
+		"fileMetadataFiles": [],
+		"template": [
+			"default",
+			"modern",
+			"templates/skyline"
+		],
+		"postProcessors": [ "ExtractSearchIndex" ],
+		"noLangKeyword": false,
+		"keepFileLink": false,
+		"cleanupCacheHistory": false,
+		"disableGitFeatures": false,
+		"markdownEngineName": "markdig",
+		"markdownEngineProperties": {
+			"plantUml": {
+				"outputFormat": "svg",
+				"remoteUrl": "https://www.plantuml.com/plantuml/",
+				"renderingMode": "remote"
+			}
+		}
+	}
+}
