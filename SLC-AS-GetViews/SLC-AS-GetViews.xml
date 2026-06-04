@@ -1,4 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<!--***********************************************
+*  Copyright (c), Skyline Communications NV.  *
+***********************************************-->
+<?xml version="1.0" encoding="utf-8"?>
 <DMSScript options="272" xmlns="http://www.skyline.be/automation">
   <Name>SLC-AS-GetViews</Name>
   <Description></Description>

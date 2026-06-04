@@ -21,6 +21,7 @@
 		<PackageReference Include="Skyline.DataMiner.Core.AppPackageInstaller" Version="4.0.0" />
 		<PackageReference Include="Skyline.DataMiner.Dev.Automation" Version="10.4.0.24" />
 		<PackageReference Include="Skyline.DataMiner.Utils.SecureCoding.Analyzers" Version="2.2.3">
+			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<!-- Pinned to resolve MSB3277 conflict: Skyline.DataMiner.Sdk injects v1.7.1 as a file reference,
