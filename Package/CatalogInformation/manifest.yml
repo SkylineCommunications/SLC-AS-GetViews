@@ -82,13 +82,13 @@ tags:
 # If the vendor ID is not provided during the initial registration, the vendor will be unset.
 # If the vendor ID is not provided during an update, the vendor will be unchanged and keep the previously set value.
 #   Must be a valid GUID.
-vendor_id: 
+#vendor_id: 
 
 # [Optional]
 # The name of the market the Catalog item belongs to.
-market_name: 
+#market_name: 
 
 # [Optional]
 # The type of the element.
 # This can only be applied to Catalog items with the type Connector.
-element_type: 
+#element_type: 
