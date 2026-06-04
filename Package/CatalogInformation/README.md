@@ -39,5 +39,5 @@ When investigating issues related to specific views or debugging automation scri
 | Parameter | Type | Description | Default / Options |
 | --- | --- | --- | --- |
 | RootView | Text (string) | Name or ID of the root view used as the starting point for hierarchy retrieval. | N/A |
-| RootViewInputType | Multiple choice (string) | Defines how `RootView` is interpreted. | Default: `Name`<br>Options: `Name`, `ID` |
-| RecursionLevel | Number | Maximum depth for subview traversal (`1` = direct subviews, `2` = one level deeper, ...).| Default: `1` |
+| RootViewInputType | Multiple choice (string) | Defines how 'RootView' is interpreted. | Default: 'Name'<br>Options: 'Name', 'ID' |
+| RecursionLevel | Number | Maximum depth for subview traversal ('1' = direct subviews, '2' = one level deeper, ...).| Default: '1' |
