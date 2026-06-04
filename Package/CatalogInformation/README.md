@@ -31,3 +31,13 @@ When investigating issues related to specific views or debugging automation scri
 
 - **DataMiner version**: Main Release 10.4 or higher
 - **User permissions**: Read access to views in the DataMiner system
+
+## Technical Reference
+
+### Input Parameters
+
+| Parameter | Type | Description | Default / Options |
+| --- | --- | --- | --- |
+| RootView | Text (string) | Name or ID of the root view used as the starting point for hierarchy retrieval. | N/A |
+| RootViewInputType | Multiple choice (string) | Defines how `RootView` is interpreted. | Default: `Name`<br>Options: `Name`, `ID` |
+| RecursionLevel | Number | Maximum depth for subview traversal (`1` = direct subviews, `2` = one level deeper, ...).| Default: `1` |
