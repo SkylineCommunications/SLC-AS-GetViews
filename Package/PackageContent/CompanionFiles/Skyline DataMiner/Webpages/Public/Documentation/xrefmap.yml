@@ -1,0 +1,24 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: contributing
+  name: Contributing
+  href: Documentation/contributing.html
+- uid: contributing-docs
+  name: Contributing to the project documentation
+  href: contributing.html
+- uid: getting-started
+  name: Getting Started
+  href: Documentation/getting-started.html
+- uid: glossary
+  name: Glossary
+  href: Documentation/glossary.html
+- uid: index
+  name: Project documentation
+  href: Documentation/index.html
+- uid: overview
+  name: Overview
+  href: Documentation/overview.html
+- uid: technical-decisions
+  name: Technical Decisions
+  href: Documentation/technical-decisions.html

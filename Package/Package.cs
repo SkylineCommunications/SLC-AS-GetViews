@@ -19,6 +19,7 @@ using Skyline.DataMiner.Net.AppPackages;
 using Skyline.DataMiner.Net.ServiceManager.Objects;
 
 using SLNetMessages = Skyline.DataMiner.Net.Messages;
+
 /// <summary>
 /// DataMiner Script Class.
 /// </summary>
